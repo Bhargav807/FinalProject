@@ -94,8 +94,6 @@ export const Login = () => {
               </button>
               <div className="m-3">
                 {/*eslint-disable-next-line}*/}
-                <a className="m-2" href="#" onClick={() => { navigate("/register") }}>Not a user yet? Register</a>
-                <br />
                 <a className="m-2" href="#" onClick={() => { navigate("/forgot-password") }}>Forgot password</a>
 
 

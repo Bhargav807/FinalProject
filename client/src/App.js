@@ -33,6 +33,8 @@ import Equipment from "./pages/user/Equipment"
 import HireEquipment from "./pages/user/HireEquipment"
 import EquipmentListing from "./pages/user/EquipmentListing"
 import PostRequirement from "./pages/user/PostRequirement"
+import ColdStorage from './pages/admin/ColdStorage';
+import ColdStorageView from './pages/user/ColdStorageView';
 import NegHistoy from './pages/user/NegHistory'
 import PotentialLeads from './pages/user/PotentialLeads';
 
@@ -73,6 +75,7 @@ function App() {
             <Route path='user/post-equipment' element={<Equipment />} />
             <Route path='user/hire-equipment' element={<HireEquipment />} />
             <Route path='user/my-equipment-listing' element={<EquipmentListing />} />
+            <Route path='user/get-all-coldstorage' element={<ColdStorageView/>} />
           </Route>
 
           <Route path='/dashboard' element={<AdminRoute />}>
@@ -83,6 +86,7 @@ function App() {
             <Route path='admin/users' element={<Users />} />
             <Route path='admin/products' element={<Products />} />
             <Route path='user/create-equipment-category' element={<EquipmentCategory />} />
+            <Route path='admin/add-coldstorage' element={<ColdStorage/>} />
           </Route>
 
 
