@@ -99,8 +99,8 @@ export const getEquipmentCategoryController = async(req,res) => {
 export const getEquipmentController = async (req, res) => {
     try {
         // Get the user's id from the request
-        const userId = req.user._id; // Assuming the user id is available in req.user._id
-
+        const uid = req?.user?._id; // Assuming the user id is available in req.user._id
+        
         // Code to get all the equipments excluding those owned by the user
         const equipments = await EquipmentModel.find().populate("owner_id");
         const categories = await EquipmentCategoryModel.find();
@@ -113,6 +113,7 @@ export const getEquipmentController = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
+        console.log(uid);
         res.status(500).send({
             message: "Error in getting the equipments",
             success: false
@@ -156,11 +157,11 @@ export const getEquipmentListing = async (req, res) => {
     try {
         // Get the user's id from the request
         const userId = req.user._id;
+        console.log("userId fetched successfully");
 
         // Code to get equipments owned by the current user
         const equipments = await EquipmentModel.find({ owner_id: userId });
         const categories = await EquipmentCategoryModel.find();
-
         res.status(200).send({
             success: true,
             message: "User's equipment fetched!",
@@ -168,7 +169,6 @@ export const getEquipmentListing = async (req, res) => {
             categories
         });
     } catch (error) {
-        console.log(error);
         res.status(500).send({
             message: "Error in getting the user's equipments",
             success: false

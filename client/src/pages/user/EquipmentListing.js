@@ -16,8 +16,10 @@ const EquipmentListing = () => {
   useEffect(() => {
     const fetchEquipmentsAndCategories = async () => {
       try {
-        const uid = auth.user._id;
-        const response = await axios.get(`${process.env.REACT_APP_API}/api/v1/equipment/my-equipment-listing/${uid}`);        
+        const uid = auth?.user?._id;
+        console.log("Before response");  
+        const response = await axios.get(`${process.env.REACT_APP_API}/api/v1/equipment/my-equipment-listing/${uid}`); 
+        console.log("response");       
         if (response.data?.success) {
           setEquipments(response.data.equipments);
           setFilteredEquipments(response.data.equipments); // Initialize filtered equipments with all equipments

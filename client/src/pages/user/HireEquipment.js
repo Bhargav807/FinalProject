@@ -17,9 +17,9 @@ const HireEquipment = () => {
     useEffect(() => {
         const fetchEquipmentsAndCategories = async () => {
             try {
-                const uid = auth.user._id;
+                const uid = auth?.user?._id;
 
-                const response = await axios.get(`${process.env.REACT_APP_API}/api/v1/equipment/hire-equipment`);
+                const response = await axios.get(`${process.env.REACT_APP_API}/api/v1/equipment/hire-equipment`,{uid});
 
                 if (response.data?.success) {
                     // Filter out equipment associated with the current user

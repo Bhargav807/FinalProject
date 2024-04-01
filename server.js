@@ -10,6 +10,7 @@ import CommodityRoutes from "./routes/CommodityRoutes.js"
 import UserRoutes from "./routes/UserRoutes.js"
 import EquipmentRoutes from "./routes/EquipmentRoutes.js"
 import RequirementRoutes from "./routes/RequirementRoutes.js"
+import ColdStorageRoutes from "./routes/ColdStorageRoutes.js"
 
 //configure environment
 dotenv.config();
@@ -40,6 +41,8 @@ app.use("/api/v1/products", CommodityRoutes)
 
 //for equipment
 app.use("/api/v1/equipment",EquipmentRoutes)
+
+app.use("/api/v1/coldstorage",ColdStorageRoutes)
 
 //for requirements posting and chat conversational
 app.use("/api/v1/requirements",RequirementRoutes)

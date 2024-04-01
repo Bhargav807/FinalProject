@@ -109,105 +109,95 @@ const SellCommodity = () => {
 
       <Nav />
       <div className="container-fluid m-3 p-3 d-flex justify-content-center">
+  <div className="col-md-8 text-center m-1" style={{ minHeight: "50vh", backgroundColor: "#f0f0f0", borderRadius: "10px", padding: "20px" }}>
+    <h3 style={{ color: "#333" }}>Fill Product details to post</h3>
+    <div className="m-1">
+      {/* Photo Upload */}
+      <div className="mb-3">
+        <label className='btn btn-primary'>
+          {photo ? photo.name : "Upload photo"}
+          <input type="file" name="photo" id="" accept='image/*' onChange={(e) => setPhoto(e.target.files[0])} hidden />
+        </label>
+      </div>
+      {photo && (
+        <div className="mb-3 text-center">
+          <img src={URL.createObjectURL(photo)} alt="Product " height={"200px"} className="img img-responsive" style={{ borderRadius: "5px" }} />
+        </div>
+      )}
+      {/* Form Inputs */}
+      <div className="mb-3">
+        <input
+          type="text"
+          value={name}
+          placeholder='Enter name'
+          className='form-control'
+          onChange={(e) => setName(e.target.value)}
+          onFocus={() => setIsFocused(true)}
+          onBlur={handleBlur}
+        />
+        {isFocused && suggestions.length > 0 && name && (
+          <ul style={{ listStyle: "none", paddingLeft: "0", display: "flex", flexDirection: "column" }}>
+            {suggestions.map((suggest, index) => (
+              <li key={index} className='bg-info p-2 m-1' onClick={() => handleSelect(suggest)} style={{ borderRadius: "5px", cursor: "pointer" }}>
+                {suggest}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
 
+      <div className="mb-3 d-flex align-items-center">
+        <input type="number" value={price} placeholder='Rs. Price' className='form-control' onChange={(e) => setPrice(e.target.value)} style={{ borderRadius: "5px", width: "120px" }} />
+        <span className='m-3' style={{ fontWeight: "600" }}>per</span>
+        <select className="form-select" value={quantityUnit} onChange={(e) => setQuantityUnit(e.target.value)} style={{ borderRadius: "5px", width: "120px" }}>
+          <option value="ton">ton</option>
+          <option value="box">box</option>
+          <option value="quintal">quintal</option>
+          <option value="dozen">dozen</option>
+          <option value="kg">kg</option>
+          <option value="item">item</option>
+          <option value="bag">bag</option>
+        </select>
+      </div>
 
+      <div className="mb-3 d-flex align-items-center">
+        <input type="number" value={quantity} placeholder='Total quantity available' className='form-control me-2' onChange={(e) => setQuantity(e.target.value)} style={{ borderRadius: "5px", width: "220px" }} />
+        <span className='m-2'>tons</span>
+      </div>
 
-        <div className="col-md-8 text-center m-1" style={{ minHeight: "50vh" }}>
-          <h3>Fill Product details to post</h3>
-          <div className="m-1">
+      <div className="m-4 d-flex align-items-center justify-content-between">
+        <label htmlFor="" className="m-0 me-3 text-dark" style={{ fontWeight: "600" }}>Available by:</label>
+        <div className="dater">
+          <input type="date" value={availableDate} placeholder='Available date' className='form-control' onChange={(e) => setAvailableDate(e.target.value)} style={{ borderRadius: "5px", width: "150px" }} />
+        </div>
+        <div className="data d-flex align-items-center">
+          <label htmlFor="" className='m-4 text-dark' style={{ fontWeight: "600" }}>Is shipping available?</label>
+          <select className="form-select" value={shipping} onChange={(e) => setShipping(e.target.value)} style={{ borderRadius: "5px", width: "100px" }}>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </select>
 
-            {/* Photo Upload */}
-            <div className="mb-3">
-              <label className='btn btn-primary btn-prinary'>
-                {photo ? photo.name : "Upload photo"}
-                <input type="file" name="photo" id="" accept='image/*' onChange={(e) => setPhoto(e.target.files[0])} hidden />
-              </label>
-            </div>
-            {photo && (
-              <div className="mb-3 text-center">
-                <img src={URL.createObjectURL(photo)} alt="Product " height={"200px"} className="img img-responsive" />
-              </div>
-            )}
-            {/* Form Inputs */}
-            <div className="mb-3">
-              <input
-                type="text"
-                value={name}
-                placeholder='Enter name'
-                className='form-control'
-                onChange={(e) => setName(e.target.value)}
-                onFocus={() => setIsFocused(true)} // Add onFocus event handler to set focus state to true
-                onBlur={handleBlur} // Add onBlur event handler
-              />
-              {/* Render suggestions dropdown */}
-              {isFocused && suggestions.length > 0 && name && (
-                <ul style={{ listStyle: "none" }}>
-                  {suggestions.map((suggest, index) => (
-                    <li key={index} className='bg-info p-1 m-1' onClick={() => handleSelect(suggest)}>
-                      {suggest}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-
-
-            <div className="mb-3 d-flex align-items-center">
-              <input type="number" value={price} placeholder='Rs. Price ' className='form-control' onChange={(e) => setPrice(e.target.value)} />
-              <span className='m-3' style={{ fontWeight: "600" }}>per</span>
-              <Radio.Group onChange={(e) => setQuantityUnit(e.target.value)} value={quantityUnit} className="d-flex align-items-center">
-                <Radio value={"ton"} className="me-3">ton</Radio>
-                <Radio value={"box"} className="me-3">box</Radio>
-                <Radio value={"quintal"} className="me-3">quintal</Radio>
-                <Radio value={"dozen"} className="me-3">dozen</Radio>
-                <Radio value={"kg"}>kg</Radio>
-                <Radio value={"item"}>item</Radio>
-                <Radio value={"bag"}>bag</Radio>
-              </Radio.Group>
-              
-            </div>
-            <div className="d-flex aligh-items-center">
-            <input type="number" value={quantity} placeholder='Total quantity available' className='form-control me-2' onChange={(e) => setQuantity(e.target.value)} />
-              <label className='m-2' htmlFor="">{quantityUnit}s</label>
-            </div>
-
-
-
-            <div className="m-4 d-flex align-items-center">
-              <label htmlFor="" className="m-0 me-3 text-dark" style={{ fontWeight: "600" }}>Available by :</label>
-              <div className="dater">
-                <input type="date" value={availableDate} placeholder='Available date' className='form-control' onChange={(e) => setAvailableDate(e.target.value)} />
-              </div>
-              <div className="data">
-                <label htmlFor="" className='m-4 text-dark' style={{ fontWeight: "600" }}>Is shipping available?</label>
-                <Radio.Group onChange={(e) => setShipping(e.target.value)} value={shipping}>
-                  <Radio value={1}>Yes</Radio>
-                  <Radio value={0}>No</Radio>
-                </Radio.Group>
-
-                <label htmlFor="" className='m-4 text-dark' style={{ fontWeight: "600" }}>Organic</label>
-                <Radio.Group onChange={(e) => setOrganic(e.target.value)} value={organic}>
-                  <Radio value={1}>Yes</Radio>
-                  <Radio value={0}>No</Radio>
-                </Radio.Group>
-              </div>
-            </div>
-
-
-            <div className="mb-3">
-              <input type="text" value={description} placeholder='Enter description' className='form-control' onChange={(e) => setDescription(e.target.value)} />
-            </div>
-
-
-
-
-
-            <div className="mb-3">
-              <button onClick={handleCreate} className='btn btn-primary'>Create Commodity</button>
-            </div>
-          </div>
+          <label htmlFor="" className='m-4 text-dark' style={{ fontWeight: "600" }}>Organic</label>
+          <select className="form-select" value={organic} onChange={(e) => setOrganic(e.target.value)} style={{ borderRadius: "5px", width: "100px" }}>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </select>
         </div>
       </div>
+
+      <div className="mb-3">
+        <input type="text" value={description} placeholder='Enter description' className='form-control' onChange={(e) => setDescription(e.target.value)} style={{ borderRadius: "5px" }} />
+      </div>
+
+      <div className="d-flex justify-content-end">
+        <button onClick={handleCreate} className='btn btn-primary me-2' style={{ borderRadius: "5px" }}>Create Commodity</button>
+        <button className='btn btn-secondary' style={{ borderRadius: "5px" }}>Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 
       <Footer />

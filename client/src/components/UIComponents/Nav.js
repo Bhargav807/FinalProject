@@ -66,7 +66,7 @@ export default function Nav() {
 
 
                             <li className="nav-item">
-                                <Link className="nav-link active p-3" aria-current="page" to="/coldstorages">Cold Storages</Link>
+                                <Link className="nav-link active p-3" aria-current="page" to="/dashboard/user/get-all-coldstorage">Hire Cold Storages</Link>
                             </li>
 
                             { /*<li className="nav-item">
